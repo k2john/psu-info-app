@@ -1,0 +1,84 @@
+<div class="min-h-screen flex items-center justify-center p-4 md:p-6 bg-gradient-to-br from-purple-700 via-pink-500 to-blue-600">
+
+  <!-- PSU Card -->
+  <div class="bg-white/90 backdrop-blur-lg shadow-2xl rounded-3xl max-w-3xl w-full p-6 md:p-8">
+
+    <!-- Title Section -->
+    <div class="text-center mb-8">
+      <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-2">
+        {{ psu.name }}
+      </h1>
+      <p class="text-lg text-gray-600">
+        {{ psu.subtitle }}
+      </p>
+    </div>
+
+    <!-- Media Section (Video & GIF Toggle) -->
+    <div class="rounded-2xl overflow-hidden shadow-lg mb-8 bg-gray-900">
+      <!-- Video Option -->
+      <div *ngIf="showVideo" class="aspect-video">
+        <iframe
+          class="w-full h-full"
+          [src]="trustedVideoUrl"
+          title="PSU Demonstration Video"
+          allowfullscreen
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+        </iframe>
+      </div>
+
+      <!-- GIF Option -->
+      <div *ngIf="!showVideo">
+        <img
+          [src]="psu.gifUrl"
+          [alt]="psu.name + ' GIF demonstration'"
+          class="w-full h-auto object-cover"
+          title="PSU Animated Demo">
+      </div>
+    </div>
+
+    <!-- Toggle Button -->
+    <div class="flex justify-center mb-8">
+      <button
+        (click)="toggleVideoGif()"
+        class="px-6 py-2 rounded-lg font-semibold text-white transition-all duration-200"
+        [ngClass]="showVideo ? 'bg-blue-600 hover:bg-blue-700' : 'bg-purple-600 hover:bg-purple-700'">
+        {{ showVideo ? 'Show GIF' : 'Show Video' }}
+      </button>
+    </div>
+
+    <!-- Specifications Grid -->
+    <div class="grid grid-cols-2 gap-6 mb-8 text-gray-800">
+
+      <div class="border-b border-gray-200 pb-4">
+        <p class="text-sm font-semibold text-gray-500 uppercase">Wattage</p>
+        <p class="text-2xl font-bold text-gray-900">{{ psu.wattage }}</p>
+      </div>
+
+      <div class="border-b border-gray-200 pb-4">
+        <p class="text-sm font-semibold text-gray-500 uppercase">Efficiency</p>
+        <p class="text-2xl font-bold text-yellow-600">{{ psu.efficiency }}</p>
+      </div>
+
+      <div class="border-b border-gray-200 pb-4">
+        <p class="text-sm font-semibold text-gray-500 uppercase">Type</p>
+        <p class="text-2xl font-bold text-gray-900">{{ psu.modular }}</p>
+      </div>
+
+      <div class="border-b border-gray-200 pb-4">
+        <p class="text-sm font-semibold text-gray-500 uppercase">Cooling</p>
+        <p class="text-2xl font-bold text-gray-900">{{ psu.fan }}</p>
+      </div>
+
+    </div>
+
+    <!-- Protection Badge -->
+    <div class="bg-gradient-to-r from-orange-100 to-red-100 border-2 border-orange-300 rounded-xl py-4 px-6 text-center">
+      <p class="text-sm font-semibold text-gray-600 uppercase mb-1">Protection Features</p>
+      <p class="text-lg font-bold text-orange-700">
+        {{ psu.protection }}
+      </p>
+    </div>
+
+  </div>
+
+</div>
