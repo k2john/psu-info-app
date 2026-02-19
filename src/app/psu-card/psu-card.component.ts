@@ -13,14 +13,14 @@ export class PsuCardComponent {
   trustedVideoUrl: SafeResourceUrl;
 
   psu = {
-    name: 'Corsair RM450x',
+    name: 'Corsair RM850x',
     subtitle: 'Computer Power Supply Unit',
-    wattage: '450W',
-    efficiency: '70+ Gold',
+    wattage: '850W',
+    efficiency: '80+ Gold',
     modular: 'Fully Modular',
     protection: 'OVP / UVP / SCP / OPP',
-    fan: '135mm Smart Fan',
-    videoUrl: 'https://www.youtube.com/embed/rz7wiAGsqBc',
+    fan: '154mm Smart Fan',
+    videoUrl: 'https://www.youtube.com/embed/_1QVfn4Rhu8',
     gifUrl: 'https://media.giphy.com/media/l0HlLbBrwwzceKgD6/giphy.gif',
   };
 

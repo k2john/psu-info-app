@@ -1,91 +1,101 @@
-<div class="min-h-screen relative overflow-hidden bg-gradient-to-tr from-slate-900 via-indigo-900 to-black text-white">
+<div class="min-h-screen bg-gradient-to-br from-[#0f172a] via-[#111827] to-black text-white relative overflow-hidden">
 
-  <!-- Decorative Glow Background -->
-  <div class="absolute -top-40 -left-40 w-[500px] h-[500px] bg-cyan-500/30 rounded-full blur-3xl"></div>
-  <div class="absolute -bottom-40 -right-40 w-[500px] h-[500px] bg-pink-500/30 rounded-full blur-3xl"></div>
+  <!-- Background Glow Lines -->
+  <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(0,255,200,0.15),transparent_40%),radial-gradient(circle_at_bottom_right,_rgba(168,85,247,0.15),transparent_40%)]"></div>
 
-  <div class="relative z-10 max-w-7xl mx-auto px-6 py-16 grid md:grid-cols-2 gap-12 items-center">
+  <div class="relative z-10 max-w-7xl mx-auto px-6 py-12 grid lg:grid-cols-[280px_1fr] gap-10">
 
-    <!-- LEFT SIDE: Product Media -->
-    <div class="space-y-6">
+    <!-- LEFT: Vertical Specs Sidebar -->
+    <div class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 space-y-6 shadow-xl">
 
-      <!-- Title -->
+      <h2 class="text-xl font-bold tracking-widest text-cyan-400 uppercase">
+        System Specs
+      </h2>
+
+      <div class="space-y-5">
+
+        <div class="flex justify-between items-center border-b border-white/10 pb-3">
+          <span class="text-gray-400 text-sm">Wattage</span>
+          <span class="text-green-400 font-bold text-lg">{{ psu.wattage }}</span>
+        </div>
+
+        <div class="flex justify-between items-center border-b border-white/10 pb-3">
+          <span class="text-gray-400 text-sm">Efficiency</span>
+          <span class="text-yellow-400 font-bold text-lg">{{ psu.efficiency }}</span>
+        </div>
+
+        <div class="flex justify-between items-center border-b border-white/10 pb-3">
+          <span class="text-gray-400 text-sm">Modular</span>
+          <span class="text-pink-400 font-bold text-lg">{{ psu.modular }}</span>
+        </div>
+
+        <div class="flex justify-between items-center">
+          <span class="text-gray-400 text-sm">Cooling</span>
+          <span class="text-blue-400 font-bold text-lg">{{ psu.fan }}</span>
+        </div>
+
+      </div>
+
+      <!-- Protection Box -->
+      <div class="mt-6 bg-gradient-to-r from-red-500/20 to-orange-400/20 border border-red-400/30 rounded-xl p-4">
+        <p class="text-xs uppercase text-red-400 mb-2">Protection</p>
+        <p class="font-semibold text-white text-sm">
+          {{ psu.protection }}
+        </p>
+      </div>
+
+    </div>
+
+    <!-- RIGHT: Main Display -->
+    <div class="space-y-10">
+
+      <!-- Header -->
       <div>
-        <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight bg-gradient-to-r from-cyan-400 via-pink-400 to-purple-500 bg-clip-text text-transparent">
+        <h1 class="text-5xl md:text-6xl font-extrabold bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-500 bg-clip-text text-transparent">
           {{ psu.name }}
         </h1>
-        <p class="text-gray-300 mt-3 text-lg">
+        <p class="text-gray-400 mt-4 text-lg max-w-2xl">
           {{ psu.subtitle }}
         </p>
       </div>
 
-      <!-- Media Display -->
-      <div class="rounded-3xl overflow-hidden shadow-2xl border border-white/10 bg-black/40 backdrop-blur-xl">
+      <!-- Center Media Frame -->
+      <div class="relative rounded-3xl border border-white/10 bg-white/5 backdrop-blur-2xl shadow-[0_0_60px_rgba(0,255,200,0.2)] overflow-hidden">
+
+        <!-- Frame Accent Border -->
+        <div class="absolute inset-0 rounded-3xl border-2 border-transparent bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 opacity-20 blur-sm"></div>
 
         <!-- Video -->
-        <div *ngIf="showVideo" class="aspect-video">
+        <div *ngIf="showVideo" class="aspect-video relative z-10">
           <iframe
-            class="w-full h-full"
+            class="w-full h-full rounded-3xl"
             [src]="trustedVideoUrl"
             allowfullscreen>
           </iframe>
         </div>
 
         <!-- GIF -->
-        <div *ngIf="!showVideo">
+        <div *ngIf="!showVideo" class="relative z-10">
           <img
             [src]="psu.gifUrl"
             [alt]="psu.name"
-            class="w-full h-auto object-cover">
+            class="w-full h-auto object-cover rounded-3xl">
         </div>
       </div>
 
-      <!-- Toggle Button -->
-      <button
-        (click)="toggleVideoGif()"
-        class="px-8 py-3 rounded-full font-semibold bg-gradient-to-r from-cyan-500 to-purple-600 hover:scale-105 transition-transform duration-300 shadow-lg">
-        {{ showVideo ? 'Switch to GIF' : 'Watch Video' }}
-      </button>
+      <!-- Controls Section -->
+      <div class="flex flex-wrap gap-4 items-center">
 
-    </div>
+        <button
+          (click)="toggleVideoGif()"
+          class="px-8 py-3 rounded-xl font-semibold bg-gradient-to-r from-cyan-500 to-purple-600 hover:scale-105 transition duration-300 shadow-lg">
+          {{ showVideo ? 'Switch to GIF' : 'Play Video' }}
+        </button>
 
-    <!-- RIGHT SIDE: Floating Specs Panel -->
-    <div class="bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-8 shadow-2xl space-y-8">
-
-      <h2 class="text-2xl font-bold tracking-wide text-cyan-300">
-        Specifications
-      </h2>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-
-        <div class="bg-white/5 rounded-xl p-4">
-          <p class="text-sm text-gray-400 uppercase">Wattage</p>
-          <p class="text-3xl font-bold text-green-400">{{ psu.wattage }}</p>
+        <div class="text-sm text-gray-500 tracking-wider">
+          POWER UNIT INTERFACE
         </div>
 
-        <div class="bg-white/5 rounded-xl p-4">
-          <p class="text-sm text-gray-400 uppercase">Efficiency</p>
-          <p class="text-3xl font-bold text-yellow-400">{{ psu.efficiency }}</p>
-        </div>
-
-        <div class="bg-white/5 rounded-xl p-4">
-          <p class="text-sm text-gray-400 uppercase">Modular Type</p>
-          <p class="text-3xl font-bold text-pink-400">{{ psu.modular }}</p>
-        </div>
-
-        <div class="bg-white/5 rounded-xl p-4">
-          <p class="text-sm text-gray-400 uppercase">Cooling</p>
-          <p class="text-3xl font-bold text-blue-400">{{ psu.fan }}</p>
-        </div>
-
-      </div>
-
-      <!-- Protection Highlight -->
-      <div class="bg-gradient-to-r from-orange-500/20 to-red-600/20 border border-orange-400/40 rounded-2xl p-6">
-        <p class="text-sm uppercase text-orange-300 mb-2">Protection Features</p>
-        <p class="text-xl font-bold text-white">
-          {{ psu.protection }}
-        </p>
       </div>
 
     </div>
