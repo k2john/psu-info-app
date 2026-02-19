@@ -1,82 +1,93 @@
-<div class="min-h-screen flex items-center justify-center p-4 md:p-6 bg-gradient-to-br from-purple-700 via-pink-500 to-blue-600">
+<div class="min-h-screen relative overflow-hidden bg-gradient-to-tr from-slate-900 via-indigo-900 to-black text-white">
 
-  <!-- PSU Card -->
-  <div class="bg-white/90 backdrop-blur-lg shadow-2xl rounded-3xl max-w-3xl w-full p-6 md:p-8">
+  <!-- Decorative Glow Background -->
+  <div class="absolute -top-40 -left-40 w-[500px] h-[500px] bg-cyan-500/30 rounded-full blur-3xl"></div>
+  <div class="absolute -bottom-40 -right-40 w-[500px] h-[500px] bg-pink-500/30 rounded-full blur-3xl"></div>
 
-    <!-- Title Section -->
-    <div class="text-center mb-8">
-      <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-2">
-        {{ psu.name }}
-      </h1>
-      <p class="text-lg text-gray-600">
-        {{ psu.subtitle }}
-      </p>
-    </div>
+  <div class="relative z-10 max-w-7xl mx-auto px-6 py-16 grid md:grid-cols-2 gap-12 items-center">
 
-    <!-- Media Section (Video & GIF Toggle) -->
-    <div class="rounded-2xl overflow-hidden shadow-lg mb-8 bg-gray-900">
-      <!-- Video Option -->
-      <div *ngIf="showVideo" class="aspect-video">
-        <iframe
-          class="w-full h-full"
-          [src]="trustedVideoUrl"
-          title="PSU Demonstration Video"
-          allowfullscreen
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
-        </iframe>
+    <!-- LEFT SIDE: Product Media -->
+    <div class="space-y-6">
+
+      <!-- Title -->
+      <div>
+        <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight bg-gradient-to-r from-cyan-400 via-pink-400 to-purple-500 bg-clip-text text-transparent">
+          {{ psu.name }}
+        </h1>
+        <p class="text-gray-300 mt-3 text-lg">
+          {{ psu.subtitle }}
+        </p>
       </div>
 
-      <!-- GIF Option -->
-      <div *ngIf="!showVideo">
-        <img
-          [src]="psu.gifUrl"
-          [alt]="psu.name + ' GIF demonstration'"
-          class="w-full h-auto object-cover"
-          title="PSU Animated Demo">
-      </div>
-    </div>
+      <!-- Media Display -->
+      <div class="rounded-3xl overflow-hidden shadow-2xl border border-white/10 bg-black/40 backdrop-blur-xl">
 
-    <!-- Toggle Button -->
-    <div class="flex justify-center mb-8">
+        <!-- Video -->
+        <div *ngIf="showVideo" class="aspect-video">
+          <iframe
+            class="w-full h-full"
+            [src]="trustedVideoUrl"
+            allowfullscreen>
+          </iframe>
+        </div>
+
+        <!-- GIF -->
+        <div *ngIf="!showVideo">
+          <img
+            [src]="psu.gifUrl"
+            [alt]="psu.name"
+            class="w-full h-auto object-cover">
+        </div>
+      </div>
+
+      <!-- Toggle Button -->
       <button
         (click)="toggleVideoGif()"
-        class="px-6 py-2 rounded-lg font-semibold text-white transition-all duration-200"
-        [ngClass]="showVideo ? 'bg-blue-600 hover:bg-blue-700' : 'bg-purple-600 hover:bg-purple-700'">
-        {{ showVideo ? 'Show GIF' : 'Show Video' }}
+        class="px-8 py-3 rounded-full font-semibold bg-gradient-to-r from-cyan-500 to-purple-600 hover:scale-105 transition-transform duration-300 shadow-lg">
+        {{ showVideo ? 'Switch to GIF' : 'Watch Video' }}
       </button>
-    </div>
-
-    <!-- Specifications Grid -->
-    <div class="grid grid-cols-2 gap-6 mb-8 text-gray-800">
-
-      <div class="border-b border-gray-200 pb-4">
-        <p class="text-sm font-semibold text-gray-500 uppercase">Wattage</p>
-        <p class="text-2xl font-bold text-gray-900">{{ psu.wattage }}</p>
-      </div>
-
-      <div class="border-b border-gray-200 pb-4">
-        <p class="text-sm font-semibold text-gray-500 uppercase">Efficiency</p>
-        <p class="text-2xl font-bold text-yellow-600">{{ psu.efficiency }}</p>
-      </div>
-
-      <div class="border-b border-gray-200 pb-4">
-        <p class="text-sm font-semibold text-gray-500 uppercase">Type</p>
-        <p class="text-2xl font-bold text-gray-900">{{ psu.modular }}</p>
-      </div>
-
-      <div class="border-b border-gray-200 pb-4">
-        <p class="text-sm font-semibold text-gray-500 uppercase">Cooling</p>
-        <p class="text-2xl font-bold text-gray-900">{{ psu.fan }}</p>
-      </div>
 
     </div>
 
-    <!-- Protection Badge -->
-    <div class="bg-gradient-to-r from-orange-100 to-red-100 border-2 border-orange-300 rounded-xl py-4 px-6 text-center">
-      <p class="text-sm font-semibold text-gray-600 uppercase mb-1">Protection Features</p>
-      <p class="text-lg font-bold text-orange-700">
-        {{ psu.protection }}
-      </p>
+    <!-- RIGHT SIDE: Floating Specs Panel -->
+    <div class="bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-8 shadow-2xl space-y-8">
+
+      <h2 class="text-2xl font-bold tracking-wide text-cyan-300">
+        Specifications
+      </h2>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+
+        <div class="bg-white/5 rounded-xl p-4">
+          <p class="text-sm text-gray-400 uppercase">Wattage</p>
+          <p class="text-3xl font-bold text-green-400">{{ psu.wattage }}</p>
+        </div>
+
+        <div class="bg-white/5 rounded-xl p-4">
+          <p class="text-sm text-gray-400 uppercase">Efficiency</p>
+          <p class="text-3xl font-bold text-yellow-400">{{ psu.efficiency }}</p>
+        </div>
+
+        <div class="bg-white/5 rounded-xl p-4">
+          <p class="text-sm text-gray-400 uppercase">Modular Type</p>
+          <p class="text-3xl font-bold text-pink-400">{{ psu.modular }}</p>
+        </div>
+
+        <div class="bg-white/5 rounded-xl p-4">
+          <p class="text-sm text-gray-400 uppercase">Cooling</p>
+          <p class="text-3xl font-bold text-blue-400">{{ psu.fan }}</p>
+        </div>
+
+      </div>
+
+      <!-- Protection Highlight -->
+      <div class="bg-gradient-to-r from-orange-500/20 to-red-600/20 border border-orange-400/40 rounded-2xl p-6">
+        <p class="text-sm uppercase text-orange-300 mb-2">Protection Features</p>
+        <p class="text-xl font-bold text-white">
+          {{ psu.protection }}
+        </p>
+      </div>
+
     </div>
 
   </div>
